@@ -6,25 +6,20 @@
  */
 
 import React from 'react';
-import {useColorScheme} from 'react-native';
 import AppNavigationContainer from './app/navigation';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { ThemeProvider } from './app/containers/appTheme';
 
 const queryClient = new QueryClient();
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
-        <AppNavigationContainer />
+        <ThemeProvider>
+          <AppNavigationContainer />
+        </ThemeProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>
   );
