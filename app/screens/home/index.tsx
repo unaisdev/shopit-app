@@ -29,6 +29,12 @@ const Home = () => {
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
+
+  const handleHideModalPress = useCallback(() => {
+    context.toggleTheme();
+    bottomSheetModalRef.current?.close();
+  }, [context]);
+
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
   }, []);
@@ -50,6 +56,11 @@ const Home = () => {
         >
           <View style={styles.contentContainer}>
             <Text style={styles.title}>Awesome 🎉</Text>
+            <Button
+              onPress={handleHideModalPress}
+              title="Present Modal"
+              color="black"
+            />
           </View>
         </BottomSheetModal>
       </View>

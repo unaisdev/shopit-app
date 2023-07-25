@@ -1,6 +1,6 @@
 // ThemeContext.tsx
 
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useMemo } from 'react';
 import { useColorScheme } from 'react-native';
 import DarkTheme from '../../theme/darkTheme';
 import LightTheme from '../../theme/lightTheme';
@@ -12,15 +12,31 @@ interface ThemeContextProps {
   toggleTheme: () => void;
 }
 
+const THEME_SCHEMA = {
+  DARK: 'dark',
+  LIGHT: 'light',
+} as const;
+
+type THEME_SCHEMA_VALUES = (typeof THEME_SCHEMA)[keyof typeof THEME_SCHEMA];
+
 const ThemeContext = createContext<ThemeContextProps | null>(null);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const isDark = useColorScheme() === 'dark';
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(isDark);
+  const [themSchema, setThemeSchema] = useState<THEME_SCHEMA_VALUES>(
+    isDark ? THEME_SCHEMA.DARK : THEME_SCHEMA.LIGHT,
+  );
 
   const toggleTheme = () => {
-    setIsDarkMode(prevMode => !prevMode);
+    setThemeSchema(prevMode =>
+      prevMode === THEME_SCHEMA.DARK ? THEME_SCHEMA.LIGHT : THEME_SCHEMA.DARK,
+    );
   };
+
+  const isDarkMode = useMemo(
+    () => themSchema === THEME_SCHEMA.DARK,
+    [themSchema],
+  );
 
   const theme = isDarkMode ? DarkTheme : LightTheme;
 
