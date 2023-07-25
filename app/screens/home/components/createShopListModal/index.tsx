@@ -6,6 +6,7 @@ import { FontFamily } from '@app/theme/Font';
 import { useTheme } from '@app/containers/appTheme';
 import { Spacing } from '@app/theme/metrics';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import useCreateShopModalAction from './useCreateShopModalAction';
 
 interface CreateShopListModalProps {}
 
@@ -13,6 +14,7 @@ const CreateShopListModal = (
   {}: CreateShopListModalProps,
   ref: React.ForwardedRef<BottomSheet>,
 ) => {
+  const { handleTitleChange, handleSubmit } = useCreateShopModalAction(ref);
   const { theme } = useTheme();
   const styles = styling(theme);
 
@@ -32,9 +34,12 @@ const CreateShopListModal = (
           style={styles.icon}
         />
         <Text style={styles.title}>Nombre de la lista</Text>
-        <BottomSheetTextInput style={styles.input} />
+        <BottomSheetTextInput
+          style={styles.input}
+          onChangeText={handleTitleChange}
+        />
         <View style={styles.buttonContianer}>
-          <TouchableOpacity style={styles.button} onPress={() => ({})}>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Crear nueva lista</Text>
           </TouchableOpacity>
         </View>
