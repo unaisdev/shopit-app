@@ -1,29 +1,29 @@
 import React from 'react';
-import { NavigationContainer, NavigationProp } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer, NavigationProp} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../screens/home';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Settings from '../screens/settings';
 
 export type RootStackParamList = {
   Home: undefined;
-  Details: { itemId: number };
+  Details: {itemId: number};
 };
 
 export type MainTabParamList = {
   Home: undefined;
-  Settings: { itemId: number };
+  Settings: {itemId: number};
 };
 
-export type RootNavigationProp = NavigationProp<MainTabParamList>;
+export type RootNavigationProp = NavigationProp<RootStackParamList>;
 
-// const Stack = createNativeStackNavigator<RootStackParamList>();
-const Tabs = createBottomTabNavigator<MainTabParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
+// const Tabs = createBottomTabNavigator<MainTabParamList>();
 
 const AppNavigationContainer = () => {
   return (
     <NavigationContainer>
-      <Tabs.Navigator screenOptions={{ headerShown: false }}>
+      <Tabs.Navigator screenOptions={{headerShown: false}}>
         <Tabs.Screen name="Home" component={Home} />
         <Tabs.Screen name="Settings" component={Settings} />
       </Tabs.Navigator>
