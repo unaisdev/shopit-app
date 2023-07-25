@@ -4,17 +4,17 @@ import { Text, View, StyleSheet } from 'react-native';
 import { RootNavigationProp } from '../../navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getItemsList } from '../../services/list';
-import { FontFamily } from '../../theme/Font';
-import { useTheme } from '../../containers/appTheme';
-import { Theme } from '../../theme/types';
 import CreateShopList from './components/createShopListButton';
-import AppLayout from '../../layout/appLayout/indext';
 import CreateShopListModal from './components/createShopListModal';
 import useModalAction from './hooks/useModalAction';
+import AppLayout from '@app/layout/appLayout';
+import { Theme } from '@app/theme/types';
+import { FontFamily } from '@app/theme/Font';
+import { useTheme } from '@app/containers/appTheme';
 
 const Home = () => {
   const navigation = useNavigation<RootNavigationProp>();
-  const { data } = useQuery({ queryKey: ['list'], queryFn: getItemsList });
+  // const { data } = useQuery({ queryKey: ['list'], queryFn: getItemsList });
   const { bottomSheetModalRef, handlePresentModalPress } = useModalAction();
 
   const context = useTheme();

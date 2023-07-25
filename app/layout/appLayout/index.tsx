@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { useTheme } from '../../containers/appTheme';
 import { Theme } from '../../theme/types';
 import { EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Spacing } from '../../theme/metrics';
 
 interface AppLayout {
   children: React.ReactNode;
@@ -18,8 +19,8 @@ const AppLayout = ({ children }: AppLayout) => {
 };
 
 const styling = (theme: Theme, insets: EdgeInsets) => {
-  const paddingVertical = 24;
-  const paddingHorizontal = 12;
+  const paddingVertical = Spacing.xl;
+  const paddingHorizontal = Spacing.l;
 
   return StyleSheet.create({
     container: {
