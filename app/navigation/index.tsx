@@ -1,8 +1,8 @@
 import React from 'react';
-import { NavigationContainer, NavigationProp } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer, NavigationProp} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../screens/home';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Settings from '../screens/settings';
 
 export type RootStackParamList = {
@@ -12,7 +12,7 @@ export type RootStackParamList = {
 
 export type MainTabParamList = {
   Home: undefined;
-  Settings: { itemId: number };
+  Settings: {itemId: number};
 };
 
 export type RootNavigationProp = NavigationProp<RootStackParamList>;
