@@ -1,24 +1,21 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useRef, useCallback, useMemo } from 'react';
-import { Text, View, Button, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
 import { RootNavigationProp } from '../../navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getItemsList } from '../../services/list';
-import {
-  BottomSheetModal,
-  BottomSheetModalProvider,
-} from '@gorhom/bottom-sheet';
 import { FontFamily } from '../../theme/Font';
 import { useTheme } from '../../containers/appTheme';
 import { Theme } from '../../theme/types';
-import CreateShopList from './components/createShopList';
+import CreateShopList from './components/createShopListButton';
 import AppLayout from '../../layout/appLayout/indext';
+import CreateShopListModal from './components/createShopListModal';
+import useModalAction from './hooks/useModalAction';
 
 const Home = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const { data } = useQuery({ queryKey: ['list'], queryFn: getItemsList });
-  // ref
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const { bottomSheetModalRef, handlePresentModalPress } = useModalAction();
 
   const context = useTheme();
   const styles = styling(context.theme);
@@ -28,7 +25,8 @@ const Home = () => {
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Tus lista</Text>
       </View>
-      <CreateShopList />
+      <CreateShopList onPress={handlePresentModalPress} />
+      <CreateShopListModal ref={bottomSheetModalRef} />
     </AppLayout>
   );
 };
