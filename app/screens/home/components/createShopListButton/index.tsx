@@ -1,8 +1,12 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const CreateShopList = () => {
+interface CreateShopListButtonProps {
+  onPress: () => void;
+}
+
+const CreateShopListButton = ({ onPress }: CreateShopListButtonProps) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -14,7 +18,8 @@ const CreateShopList = () => {
         paddingBottom: insets.bottom + 24,
       }}
     >
-      <View
+      <TouchableOpacity
+        onPress={onPress}
         style={{
           backgroundColor: '#E25100',
           width: 62,
@@ -29,9 +34,9 @@ const CreateShopList = () => {
           source={require('../../../../assets/icons/plus.png')}
           style={{ width: 24, height: 24, tintColor: 'white' }}
         />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
 
-export default CreateShopList;
+export default CreateShopListButton;
