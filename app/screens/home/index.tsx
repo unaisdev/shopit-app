@@ -37,7 +37,9 @@ const Home = () => {
           snapPoints={snapPoints}
           onChange={handleSheetChanges}>
           <View style={styles.contentContainer}>
-            <Text>Awesome 🎉</Text>
+            <Text style={{fontFamily: 'Nunito-ExtraBold', fontSize: 30}}>
+              Awesome 🎉
+            </Text>
           </View>
         </BottomSheetModal>
       </View>
